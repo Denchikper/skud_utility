@@ -23,7 +23,17 @@
     },
     "win": {
       "icon": "img/icon.ico"
-    }
+    },
+    "extraResources": [
+      {
+        "from": "./Settings",
+        "to": "../Settings"
+      },
+      {
+        "from": "./GP",
+        "to": "../GP"
+      }
+    ]
   },
   "dependencies": {
     "fs": "^0.0.1-security",

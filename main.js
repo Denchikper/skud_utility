@@ -2,7 +2,7 @@ const { app, BrowserWindow, nativeTheme, ipcMain } = require('electron');
 const path = require("path");
 const { execFile } = require('child_process');
 const fs = require('fs-extra');
-const settings = require("./settings.json")
+const settings = require("./Settings/settings.json")
 
 const createWindow = () => {
   const win = new BrowserWindow({
