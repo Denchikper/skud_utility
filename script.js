@@ -23,7 +23,7 @@ const handleClick = (button) => {
 }}
 
 const copyFile = (numGp) => {
-    const source = `GP\\${numGp}\\parsec.ini`;  // Замените на путь к исходному файлу
+    const source = `GP\\${numGp}\\parsec.ini`;
     console.log(source)
     window.electronAPI.copyFile(source);
 }

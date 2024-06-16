@@ -28,23 +28,23 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') 
-        app.quit();
+  if (process.platform !== 'darwin') 
+    app.quit();
 });
 
 ipcMain.on('run-program', () => {
-    if(settings.debug) {
-      programPath = settings.D_programPath
-    } else { programPath = settings.programPath }
+  if(settings.debug) {
+    programPath = settings.D_programPath
+  } else { programPath = settings.programPath }
 
-    execFile(programPath, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Program start error: ${error}`);
-        console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
-    });
+  execFile(programPath, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Program start error: ${error}`);
+      console.log(`stdout: ${stdout}`);
+      console.error(`stderr: ${stderr}`);
+      return;
+    }
+  });
 });
 
 ipcMain.on('copy-file', async (event, { source }) => {
@@ -60,6 +60,6 @@ ipcMain.on('close-program', async () => {
     destFileDelete = settings.D_destFilePath
   } else { destFileDelete = settings.destFilePath }
   
-    await fs.remove(destFileDelete);
-    app.quit();
+  await fs.remove(destFileDelete);
+  app.quit();
 });
