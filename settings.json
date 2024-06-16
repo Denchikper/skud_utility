@@ -1,0 +1,9 @@
+{
+    "debug": false,
+
+    "D_programPath": "C:\\Windows\\System32\\notepad.exe",
+    "D_destFilePath": "D:\\Development\\SKYD_utility\\end\\parsec.ini",
+
+    "programPath": "C:\\Program Files\\MDO\\ParsecNET 3\\MDO.Parsec.Win.exe",
+    "destFilePath": "C:\\ProgramData\\MDO\\ParsecNET 3\\parsec.ini"
+}
