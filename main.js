@@ -54,6 +54,7 @@ ipcMain.on('copy-file', async (event, { source }) => {
     try {
         await fs.copy(source, destFileCopy);
         console.log('File copy successful!');
+        event.reply('copy-file-success', 'File copy successful!');
     } catch (err) {
         console.error('Copy file error:', err);
     }
