@@ -8,6 +8,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 625,
     height: 288,
+    resizable: settings.debug,
     icon: path.join(__dirname, 'img/maintenance.png'),
     webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
@@ -51,27 +52,14 @@ ipcMain.on('copy-file', async (event, { source }) => {
       destFileCopy = settings.D_destFilePath
     } else { destFileCopy = settings.destFilePath }
 
-    try {
-        await fs.copy(source, destFileCopy);
-        console.log('File copy successful!');
-        event.reply('copy-file-success', 'File copy successful!');
-    } catch (err) {
-        console.error('Copy file error:', err);
-        event.reply('copy-file-error', 'opy file error');
-    }
+    await fs.copy(source, destFileCopy);
 });
 
-ipcMain.on('close-program', async (event) => {
+ipcMain.on('close-program', async () => {
   if(settings.debug) {
     destFileDelete = settings.D_destFilePath
   } else { destFileDelete = settings.destFilePath }
   
-  try {
-      await fs.remove(destFileDelete);
-      console.log('File delete successful!');
-      event.reply('copy-file-success', 'File copy successful!');
-      // app.quit();
-  } catch (err) {
-      console.error('Delete file error:', err);
-  }
+    await fs.remove(destFileDelete);
+    app.quit();
 });
