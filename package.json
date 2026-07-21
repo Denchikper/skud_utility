@@ -1,42 +1,27 @@
 {
-  "name": "skyd_utility",
-  "version": "1.1.0",
-  "description": "Program for KNVMU",
-  "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
-  },
+  "name": "skud_utility",
+  "version": "2.0.0",
+  "description": "Утилита СКУД для ParsecNET (Tauri)",
   "author": "Daniil Mankus",
   "license": "ISC",
-  "devDependencies": {
-    "electron": "^31.0.0",
-    "electron-builder": "^24.13.3"
-  },
-  "build": {
-    "appId": "com.skyd_utility.yourapp",
-    "productName": "Улилита СКУД",
-    "directories": {
-      "output": "dist"
-    },
-    "win": {
-      "icon": "img/icon.ico"
-    },
-    "extraResources": [
-      {
-        "from": "./Settings",
-        "to": "../Settings"
-      },
-      {
-        "from": "./GP",
-        "to": "../GP"
-      }
-    ]
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
   },
   "dependencies": {
-    "fs": "^0.0.1-security",
-    "fs-extra": "^11.2.0"
+    "@tauri-apps/api": "^2.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3"
   }
 }

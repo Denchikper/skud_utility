@@ -7,3 +7,7 @@ GP/GP7/parsec.ini
 GP/GP9/parsec.ini
 GP/GP10/parsec.ini
 node_modules
+
+# Tauri / Rust build artifacts
+src-tauri/target
+src-tauri/gen/schemas
