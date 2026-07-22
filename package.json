@@ -2,9 +2,14 @@
   "name": "kordon",
   "version": "2.0.0",
   "description": "Кордон — утилита СКУД для ParsecNET (Tauri)",
-  "author": "Daniil Mankus",
-  "license": "ISC",
+  "author": "Daniel Benovich",
+  "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Denchikper/kordon-skud.git"
+  },
+  "homepage": "https://github.com/Denchikper/kordon-skud",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -13,6 +18,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.1.1",
+    "@tauri-apps/plugin-opener": "^2.2.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

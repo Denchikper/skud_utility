@@ -1,3 +1,6 @@
+// Кордон — утилита СКУД для ParsecNET
+// by Benovich · https://github.com/Denchikper/kordon-skud
+
 import { useCallback, useEffect, useState } from "react";
 import type { Settings, Theme, View } from "./types";
 import * as api from "./api";

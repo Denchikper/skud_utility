@@ -518,6 +518,49 @@ body {
   font-size: 13px;
 }
 
+/* ---------- About ---------- */
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.about__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.about__key {
+  color: var(--text-2);
+}
+.about__val {
+  color: var(--text);
+  font-weight: 500;
+}
+.about__links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.about__link {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.about__link:hover {
+  text-decoration: underline;
+}
+.about__link--muted {
+  margin-left: auto;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
 /* ---------- Focus visibility & motion ---------- */
 :focus-visible {
   outline: 2px solid var(--primary);

@@ -3,6 +3,14 @@ import type { Profile, Settings, Theme } from "../types";
 import { SettingsRow } from "./SettingsRow";
 import { SegmentedControl } from "./SegmentedControl";
 import { BackIcon, PlusIcon, TrashIcon } from "./Icon";
+import {
+  APP_VERSION,
+  AUTHOR,
+  AUTHOR_SIGNATURE,
+  AUTHOR_URL,
+  REPO_URL,
+} from "../appInfo";
+import { openExternal } from "../openExternal";
 
 type Props = {
   settings: Settings;
@@ -184,6 +192,42 @@ export function SettingsView({ settings, onSave, onCancel }: Props) {
               onChange={(theme) => patch({ theme })}
             />
           </SettingsRow>
+        </section>
+
+        <section className="settings-section">
+          <h2>О приложении</h2>
+          <div className="about">
+            <div className="about__row">
+              <span className="about__key">Версия</span>
+              <span className="about__val">{APP_VERSION}</span>
+            </div>
+            <div className="about__row">
+              <span className="about__key">Автор</span>
+              <span className="about__val">{AUTHOR}</span>
+            </div>
+            <div className="about__links">
+              <a
+                href={REPO_URL}
+                className="about__link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  void openExternal(REPO_URL);
+                }}
+              >
+                Открыть на GitHub
+              </a>
+              <a
+                href={AUTHOR_URL}
+                className="about__link about__link--muted"
+                onClick={(e) => {
+                  e.preventDefault();
+                  void openExternal(AUTHOR_URL);
+                }}
+              >
+                {AUTHOR_SIGNATURE}
+              </a>
+            </div>
+          </div>
         </section>
 
         {error && <p className="settings-error">{error}</p>}

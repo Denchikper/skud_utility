@@ -3,5 +3,5 @@
   "identifier": "default",
   "description": "Default capability for the main window. Custom app commands are allowed by default; only core window controls need to be granted here.",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": ["core:default", "opener:default"]
 }

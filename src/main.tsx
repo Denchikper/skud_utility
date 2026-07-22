@@ -1,3 +1,6 @@
+// Кордон — утилита СКУД для ParsecNET
+// by Benovich · https://github.com/Denchikper/kordon-skud
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
