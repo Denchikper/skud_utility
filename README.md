@@ -7,6 +7,7 @@
 **Настольная утилита СКУД для ParsecNET** — переключение профилей контрольно‑пропускных пунктов в один клик.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Denchikper/kordon-skud?label=release&color=0078D6)](https://github.com/Denchikper/kordon-skud/releases)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078D6)
 ![Tauri](https://img.shields.io/badge/Tauri-2-24C8DB?logo=tauri&logoColor=white)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
@@ -73,8 +74,12 @@
 
 ## Установка
 
-Готовые установщики (NSIS `.exe` и `.msi`) собираются из исходников под Windows —
-см. ниже. Приложению нужны права администратора для записи в защищённую папку
+Готовые установщики (NSIS `.exe` и `.msi`) — на странице
+[релизов](https://github.com/Denchikper/kordon-skud/releases).
+Установщики не подписаны сертификатом: SmartScreen при первом запуске
+предупредит — «Подробнее» → «Выполнить в любом случае».
+
+Приложению нужны права администратора для записи в защищённую папку
 ParsecNET (манифест `requireAdministrator` уже вшит — UAC спросит один раз).
 
 ## Сборка из исходников
