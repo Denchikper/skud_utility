@@ -1,0 +1,89 @@
+# Кордон — утилита СКУД для ParsecNET
+# by Benovich · https://github.com/Denchikper/kordon-skud
+
+name: build
+
+# Право на запись нужно tauri-action, чтобы создавать релиз по тегу
+permissions:
+  contents: write
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Проверка Rust
+        run: cargo test
+        working-directory: src-tauri
+
+      - name: Сборка приложения
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Релиз создаётся только при пуше тега v*
+          tagName: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+          releaseName: ${{ startsWith(github.ref, 'refs/tags/v') && format('Кордон {0}', github.ref_name) || '' }}
+          releaseDraft: true
+
+      # Кириллица из productName выпадает из имён файлов при загрузке
+      # в релиз («_2.0.0_x64-setup.exe») — даём ассетам понятные имена.
+      - name: Понятные имена файлов релиза
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          ver="${TAG#v}"
+          rel=$(gh api "repos/$GITHUB_REPOSITORY/releases" \
+            --jq ".[] | select(.tag_name==\"$TAG\") | .id" | head -1)
+          gh api "repos/$GITHUB_REPOSITORY/releases/$rel/assets" --paginate \
+            --jq '.[] | [.id, .name] | @tsv' |
+          while IFS=$'\t' read -r id name; do
+            case "$name" in
+              *-setup.exe) new="Kordon_${ver}_Windows_x64-setup.exe" ;;
+              *.msi) new="Kordon_${ver}_Windows_x64.msi" ;;
+              *) continue ;;
+            esac
+            [ "$name" = "$new" ] || gh api -X PATCH \
+              "repos/$GITHUB_REPOSITORY/releases/assets/$id" -f name="$new"
+          done
+
+      # Собираем установщики в плоскую папку, чтобы в артефакте
+      # были сразу готовые файлы, а не дерево каталогов target/
+      - name: Подготовка артефактов
+        shell: bash
+        run: |
+          mkdir -p installers
+          find src-tauri/target -path "*/release/bundle/*" \
+            \( -name "*.exe" -o -name "*.msi" \) \
+            -exec cp {} installers/ \;
+          ls -la installers/
+
+      - name: Артефакты сборки
+        uses: actions/upload-artifact@v4
+        with:
+          name: kordon-windows
+          path: installers/*
+          if-no-files-found: warn
